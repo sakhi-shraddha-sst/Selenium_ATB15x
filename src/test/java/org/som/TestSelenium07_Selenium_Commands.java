@@ -1,8 +1,7 @@
 package org.som;
 
-public class Test {
+public class TestSelenium07_Selenium_Commands {
     public static void main(String[] args) {
 
-        System.out.println("Testing");
     }
 }
