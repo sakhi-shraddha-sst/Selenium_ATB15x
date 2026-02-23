@@ -31,6 +31,118 @@
       <scope>test</scope>
     </dependency>
 
+    <!-- Source: https://mvnrepository.com/artifact/org.assertj/assertj-core -->
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>3.27.7</version>
+      <scope>test</scope>
+    </dependency>
 
   </dependencies>
+
+  <build>
+    <plugins>
+      <!-- Maven Antrun Plugin to generate testng.xml dynamically -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <phase>process-test-resources</phase>
+            <configuration>
+              <target>
+                <script language="javascript">
+                  <![CDATA[
+                    var File = Java.type("java.io.File");
+                    var FileWriter = Java.type("java.io.FileWriter");
+                    var BufferedReader = Java.type("java.io.BufferedReader");
+                    var FileReader = Java.type("java.io.FileReader");
+                    var testDir = new File("src/test/java/org/som");
+                    var testClasses = [];
+
+                    // Function to check if file contains @Test annotation
+                    function hasTestAnnotation(file) {
+                      try {
+                        var reader = new BufferedReader(new FileReader(file));
+                        var line;
+                        while ((line = reader.readLine()) != null) {
+                          if (line.contains("@Test")) {
+                            reader.close();
+                            return true;
+                          }
+                        }
+                        reader.close();
+                      } catch (e) {
+                        project.log("Error reading " + file.getName() + ": " + e);
+                      }
+                      return false;
+                    }
+
+                    // Scan for test classes with @Test annotation
+                    if (testDir.exists() && testDir.isDirectory()) {
+                      var files = testDir.listFiles();
+                      if (files != null) {
+                        for (var i = 0; i < files.length; i++) {
+                          var file = files[i];
+                          if (file.isFile() && file.getName().endsWith(".java")) {
+                            // Check if file contains @Test annotation
+                            if (hasTestAnnotation(file)) {
+                              var fileName = file.getName().substring(0, file.getName().length - 5);
+                              testClasses.push("org.som." + fileName);
+                            }
+                          }
+                        }
+                      }
+                    }
+
+                    // Sort the classes
+                    testClasses.sort();
+
+                    // Generate testng.xml
+                    var xml = '<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">\n';
+                    xml += '\n';
+                    xml += '<suite name="Suite1" verbose="1">\n';
+                    xml += '    <test name="TestSuite">\n';
+                    xml += '        <classes>\n';
+
+                    for (var i = 0; i < testClasses.length; i++) {
+                      xml += '            <class name="' + testClasses[i] + '"/>\n';
+                    }
+
+                    xml += '        </classes>\n';
+                    xml += '    </test>\n';
+                    xml += '</suite>\n';
+
+                    // Write to file
+                    var writer = new FileWriter("testng.xml");
+                    writer.write(xml);
+                    writer.close();
+
+                    project.log("Generated testng.xml with " + testClasses.length + " test classes containing @Test annotation");
+                  ]]>
+                </script>
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- TestNG Maven Plugin -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.1.2</version>
+        <configuration>
+          <suiteXmlFiles>
+            <suiteXmlFile>testng.xml</suiteXmlFile>
+          </suiteXmlFiles>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
