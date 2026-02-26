@@ -1,4 +1,4 @@
-package org.som;
+package org.som.ex01_Selenium;
 
 import org.openqa.selenium.safari.SafariDriver;
 

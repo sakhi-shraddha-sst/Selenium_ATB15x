@@ -1,10 +1,8 @@
-package org.som;
+package org.som.ex02_Selenium_Basics;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.safari.SafariDriver;
-import org.testng.Assert;
-import org.testng.annotations.Test;
 
 public class TestSelenium11_TestNG_Example {
 

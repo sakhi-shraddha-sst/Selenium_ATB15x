@@ -1,4 +1,4 @@
-package org.som;
+package org.som.ex01_Selenium;
 
 public class Selenium003 {
     public static void main(String[] args) {
