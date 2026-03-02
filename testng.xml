@@ -1,14 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
 <suite name="Suite1" verbose="1">
     <test name="TestSuite">
         <classes>
-            <class name="org.som.ex02_Selenium_Basics.TestSelenium09_Assertion_TestNG"/>
-            <class name="org.som.ex02_Selenium_Basics.TestSelenium10_TestNG_Example"/>
-            <class name="org.som.ex02_Selenium_Basics.TestSelenium12_Navigation_Get_NavigateTo"/>
-            <class name="org.som.ex03_Locators.TestSelenium15"/>
-            <class name="org.som.ex03_Locators.TestSelenium16_LinkText_Partial_Text_TagName_Locators"/>
-            <class name="org.som.ex03_Locators.TestSelenium17_Mini_Project2_TagName"/>
         </classes>
     </test>
 </suite>

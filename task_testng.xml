@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Suite2" verbose="1">
+<suite name="Task Suite2" verbose="1">
     <test name="TaskTestSuite">
         <classes>
-            <class name="org.som.tasks.Task_25Feb_Selenium_Katalon"/>
+<!--            <class name="org.som.tasks.Task_25Feb_Selenium_Katalon"/>-->
+            <class name="org.som.tasks.Task_27Feb_Selenium_TTA_Bank"/>
         </classes>
     </test>
 </suite>
