@@ -8,7 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TestSelenium17_Mini_Project2_TagName {
+public class TestSelenium17_Mini_Project1_TagName {
 
     @Owner("Sakhi Mali")
     @Severity(SeverityLevel.BLOCKER)

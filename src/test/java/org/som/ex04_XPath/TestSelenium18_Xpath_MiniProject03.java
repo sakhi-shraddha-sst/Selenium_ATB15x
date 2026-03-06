@@ -8,7 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TestSelenium18_Xpath_MiniProject {
+public class TestSelenium18_Xpath_MiniProject03 {
 
     @Owner("Sakhi Mali")
     @Severity(SeverityLevel.CRITICAL)
