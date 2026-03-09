@@ -18,7 +18,7 @@ public class CommonToAll {
         driver.quit();
     }
 
-    public static void clickElementFound(String xpath){
+    public static void clickElementFound(WebDriver driver, String xpath){
         WebElement element = driver.findElement(By.xpath(xpath));
         element.click();
     }
