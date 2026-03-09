@@ -70,7 +70,7 @@ public class Task_06March_Flipkart_Cheapest_Price extends CommonToAll {
 //        System.out.println("Cheapest Price: " + sorted_price_list.get(0));
 //        System.out.println("=".repeat(40));
 
-//        closeBrowser(driver);
+        closeBrowser(driver);
 
     }
 
