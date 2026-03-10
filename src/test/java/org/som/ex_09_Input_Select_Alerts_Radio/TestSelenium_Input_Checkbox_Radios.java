@@ -11,8 +11,9 @@ public class TestSelenium_Input_Checkbox_Radios {
     @Test
     public void test_select() {
         WebDriver driver = new ChromeDriver();
-        String url = "https://awesomeqa.com/practice.html";
-        driver.get(url);
+        String URL = "https://awesomeqa.com/practice.html";
+        driver.get(URL);
+        driver.manage().window().maximize();
 
         // Radio Button
         WebElement radio2 = driver.findElement(By.xpath("//input[@id='sex-1']"));

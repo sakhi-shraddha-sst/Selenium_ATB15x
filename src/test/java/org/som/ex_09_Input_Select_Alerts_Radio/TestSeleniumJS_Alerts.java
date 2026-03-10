@@ -14,7 +14,10 @@ public class TestSeleniumJS_Alerts extends CommonToAll {
     @Test
     public void test_Alerts() {
         WebDriver driver = new ChromeDriver();
-        openBrowser(driver, "https://the-internet.herokuapp.com/javascript_alerts");
+        String URL = "https://the-internet.herokuapp.com/javascript_alerts";
+        driver.get(URL);
+        driver.manage().window().maximize();
+
         System.out.println(driver.getTitle());
 
         WebElement elementAlert = driver.findElement(By.xpath("//button[@onclick='jsAlert()']"));

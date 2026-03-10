@@ -15,7 +15,9 @@ public class TestSelenium_Input_Select_DropDown extends CommonToAll {
     @Test
     public void test_select() {
         WebDriver driver = new ChromeDriver();
-         driver.get("https://the-internet.herokuapp.com/dropdown");
+        String URL = "https://the-internet.herokuapp.com/dropdown";
+        driver.get(URL);
+        driver.manage().window().maximize();
 
         WebElement element = driver.findElement(By.id("dropdown"));
         Select select = new Select(element);

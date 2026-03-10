@@ -4,14 +4,18 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.som.CommonToAll;
 import org.som.WaitHelpers;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -29,12 +33,18 @@ public class Task_09March_Booking_Web_DropDown extends CommonToAll {
 //        and then click the enter button. It will automatically select daily.
 //        Then you need to click on the explore or search button afterwards.
 
+        WebDriver driver = new ChromeDriver();
+        String URL = "https://www.booking.com/";
+        driver.get(URL);
+        driver.manage().window().maximize();
 
-        driver = new ChromeDriver();
-        openBrowser(driver, "https://www.booking.com");
+        String close_modal = "//button[@aria-label='Dismiss sign in information.']//*[local-name()='svg']";
 
-        WaitHelpers.checkElementToBeClickable(driver, By.xpath("//div[@role='dialog']//child::button"), 10);
-        WebElement mainPopup = driver.findElement(By.xpath("//div[@role='dialog']//child::button"));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
+        WebElement mainPopup = wait.until(ExpectedConditions.elementToBeClickable
+                (By.xpath(close_modal)));
+
         mainPopup.click();
 
 //        WebElement flightsMenu = driver.findElement(By.id("flights"));
@@ -56,9 +66,11 @@ public class Task_09March_Booking_Web_DropDown extends CommonToAll {
 
         //input[@aria-autocomplete='list' and @id=':r3:']
         String destination_input_xpath = "//input[@aria-autocomplete='list' and @id=':r3:']";
-        WaitHelpers.checkVisibilityOfElement(driver, By.xpath(destination_input_xpath), 5);
-        WebElement input_destination = driver.findElement(By.xpath(destination_input_xpath));
+        WebElement input_destination = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath(destination_input_xpath)));
+
         input_destination.click();
+
         WaitHelpers.waitJVM(4);
 
         input_destination.clear();
@@ -73,17 +85,20 @@ public class Task_09March_Booking_Web_DropDown extends CommonToAll {
 
 //        WebElement btn_explore = driver.findElement(By.xpath("//button[@data-ui-name='button_search_submit']"));
 
-        WebElement btn_find = driver.findElement(By.xpath("//button[@aria-label='Find']"));
+        WebElement btn_find = wait.until(ExpectedConditions.elementToBeClickable
+                (By.xpath("//button[@aria-label='Find']")));
 
         //button[@aria-label='Find']
         btn_find.click();
 
-        WaitHelpers.waitForTitle(driver, 5, "Delhi");
+
+        WaitHelpers.waitForTitle(driver, 10, "Delhi");
 
         String title = driver.getTitle();
         System.out.println(title);
 
         Assert.assertTrue(title.contains("Delhi"));
+
         closeBrowser(driver);
 
     }
