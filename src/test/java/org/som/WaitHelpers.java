@@ -15,6 +15,8 @@ public class WaitHelpers {
 
     public static void waitJVM(int time){
         try {
+            time = time * 1000;
+//            long seconds = time * 1000L;
             Thread.sleep(time);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
@@ -48,6 +50,11 @@ public class WaitHelpers {
     public static void waitForAlert(WebDriver driver, int timeInSeconds){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeInSeconds));
         wait.until(ExpectedConditions.alertIsPresent());
+    }
+
+    public static void waitForTitle(WebDriver driver, int timeInSeconds, String title){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeInSeconds));
+        wait.until(ExpectedConditions.titleContains(title));
     }
 
     public static WebElement checkVisibilityByFluentWait(WebDriver driver, By locator){
