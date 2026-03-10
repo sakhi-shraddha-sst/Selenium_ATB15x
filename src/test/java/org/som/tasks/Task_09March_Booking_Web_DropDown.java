@@ -80,7 +80,6 @@ public class Task_09March_Booking_Web_DropDown extends CommonToAll {
 
         Actions actions = new Actions(driver);
         actions.sendKeys(Keys.TAB);
-
         actions.build().perform();
 
 //        WebElement btn_explore = driver.findElement(By.xpath("//button[@data-ui-name='button_search_submit']"));
@@ -88,7 +87,6 @@ public class Task_09March_Booking_Web_DropDown extends CommonToAll {
         WebElement btn_find = wait.until(ExpectedConditions.elementToBeClickable
                 (By.xpath("//button[@aria-label='Find']")));
 
-        //button[@aria-label='Find']
         btn_find.click();
 
 
